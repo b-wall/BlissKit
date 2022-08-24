@@ -1,0 +1,84 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %}Bliss Kit{% endblock %}</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <link rel="shortcut icon" href="{% static 'network/favicon.svg' %}" type="image/x-icon">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link href="{% static 'network/styles.css' %}" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@1,600&family=Patua+One&family=Poppins&display=swap"rel="stylesheet">
+        <script src="{% static 'network/app.js' %}"></script>
+    </head>
+    <body>
+
+        <nav>
+            <div class="nav-container">
+                <div class="nav-wrapper">
+                    <button class="menu-btn" id="nav-menu-btn" aria-expanded="false" aria-controls="menu" aria-label="open navigator">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-list"
+                            viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+                        </svg>
+                    </button>
+                    <ul class="nav-links">
+                        {% if user.is_authenticated %}
+                        <li>
+                            <a href="{% url 'allposts' %}" class="logo nav-link">
+                                <svg width="24" height="25" viewBox="0 0 24 25" fill="#ffffff" xmlns="http://www.w3.org/2000/svg">
+                                    <g clip-path="url(#clip0_4_2)">
+                                        <path
+                                            d="M18 8.5H19C20.0609 8.5 21.0783 8.92143 21.8284 9.67157C22.5786 10.4217 23 11.4391 23 12.5C23 13.5609 22.5786 14.5783 21.8284 15.3284C21.0783 16.0786 20.0609 16.5 19 16.5H18"
+                                            stroke="#141414" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path
+                                            d="M2 8.5H18V17.5C18 18.5609 17.5786 19.5783 16.8284 20.3284C16.0783 21.0786 15.0609 21.5 14 21.5H6C4.93913 21.5 3.92172 21.0786 3.17157 20.3284C2.42143 19.5783 2 18.5609 2 17.5V8.5Z"
+                                            stroke="#141414" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M6 1.5V4.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M10 1.5V4.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M14 1.5V4.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_4_2">
+                                            <rect width="24" height="24" fill="#BB5353" transform="translate(0 0.5)" />
+                                        </clipPath>
+                                    </defs>
+                                </svg> Bliss Kit</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'userprofile' request.user.id %}" class="nav-link" style="color:rgb(204, 116, 116)">{{ user.username }}</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'allposts' %}" class="nav-link">All Posts</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'following' %}" class="nav-link">Following</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'logout' %}" class="nav-link">Logout</a>
+                        </li>
+                        {% else %}
+                        <li>
+                            <a href="{% url 'index' %}" class="logo nav-link"><img src="{% static 'network/coffee.svg' %}" alt="logo"> Bliss
+                                Kit.</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'login' %}" class="nav-link">Login</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'register' %}" class="nav-link">Register</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="body">
+            {% block body %}
+            {% endblock %}
+        </div>
+    </body>
+</html>
